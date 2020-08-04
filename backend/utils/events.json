@@ -1,0 +1,170 @@
+[
+  {
+    "details": {
+      "date": "2020-07-15T20:00:00.00Z",
+      "tags": ["terraform", "manning"],
+      "url": "https://www.twitch.tv/manningpublications"
+    },
+    "name": "Secrets Management with Terraform - Scott Winkler / Terraform in Action"
+  },
+  {
+    "details": {
+      "date": "2020-07-29T10:00:00.00Z",
+      "tags": ["manning", "microservices", "kubernetes"],
+      "url": "https://www.twitch.tv/manningpublications"
+    },
+    "name": "Securing Microservices with Istio Service Mesh w/ Prabath Siriwardena"
+  },
+  {
+    "details": {
+      "date": "2020-07-06T22:00:00.00Z",
+      "tags": ["aws", "cloudformation", "manning"],
+      "url": "https://www.twitch.tv/manningpublications"
+    },
+    "name": "Chuck Gehman - The CloudFormation Stack Lifecycle / AWS CloudFormation in Action"
+  },
+  {
+    "details": {
+      "date": "2020-06-25T12:00:00.00Z",
+      "tags": ["azure", "analytics"],
+      "url": "https://www.twitch.tv/manningpublications"
+    },
+    "name": "Richard Nuckolls - Azure Stream Analytics / Azure Data Engineering"
+  },
+  {
+    "details": {
+      "date": "2020-08-12T09:00:00.00Z",
+      "tags": ["aws", "tag2"],
+      "url": "https://www.twitch.tv/aws"
+    },
+    "name": "Containers from the couch: ECS Workshop!"
+  },
+  {
+    "details": {
+      "date": "2020-08-14T15:30:00.00Z",
+      "tags": ["aws", "tag2"],
+      "url": "https://www.twitch.tv/aws"
+    },
+    "name": "SageMaker Friday | S1 E5"
+  },
+  {
+    "details": {
+      "date": "2020-08-13T08:00:00.00Z",
+      "tags": ["aws", "tag2"],
+      "url": "https://www.twitch.tv/aws"
+    },
+    "name": "AWS Community Voices | Episode 1"
+  },
+  {
+    "details": {
+      "date": "2020-08-26T16:00:00.00Z",
+      "tags": ["aws", "tag2"],
+      "url": "https://www.twitch.tv/aws"
+    },
+    "name": "Howdy Partner! With @CHAOSSEARCH"
+  },
+  {
+    "details": {
+      "date": "2020-08-06T13:15:00.00Z",
+      "tags": ["aws", "tag2"],
+      "url": "https://www.twitch.tv/aws"
+    },
+    "name": "AWS Whats Next S1 | E8 - News, announcements, and live demos of the latest services"
+  },
+  {
+    "details": {
+      "date": "2020-07-30T06:00:00.00Z",
+      "tags": ["aws", "tag2"],
+      "url": "https://www.twitch.tv/aws"
+    },
+    "name": "AWS Africa Office Hours | 30 July 2020"
+  },
+  {
+    "details": {
+      "date": "2020-08-05T18:00:00.00Z",
+      "tags": ["azure", "bots"],
+      "url": "https://www.twitch.tv/microsoftdeveloper"
+    },
+    "name": "The bot experience - thinking about the user"
+  },
+  {
+    "details": {
+      "date": "2020-08-08T10:00:00.00Z",
+      "tags": ["azure", "conversational"],
+      "url": "https://www.twitch.tv/microsoftdeveloper"
+    },
+    "name": "Who said that? Getting started with LUIS"
+  },
+  {
+    "details": {
+      "date": "2020-07-31T20:30:00.00Z",
+      "tags": ["azure", "python", "mongodb"],
+      "url": "https://www.twitch.tv/microsoftdeveloper"
+    },
+    "name": "Twitch Tracker App: Python, PyMongo and VS Code"
+  },
+  {
+    "details": {
+      "date": "2020-08-01T11:00:00.00Z",
+      "tags": ["azure", "website"],
+      "url": "https://www.twitch.tv/microsoftdeveloper"
+    },
+    "name": "Updating Your Brand With a Static Web Site"
+  },
+  {
+    "details": {
+      "date": "2020-08-09T09:00:00.00Z",
+      "tags": ["azure", "notifications"],
+      "url": "https://www.twitch.tv/microsoftdeveloper"
+    },
+    "name": "Building a Notifications client with Xamarin and Azure: Adding the Azure Functions endpoint - Part 3"
+  },
+  {
+    "details": {
+      "date": "2020-08-05T13:00:00.00Z",
+      "tags": ["azure", "blockchain"],
+      "url": "https://www.twitch.tv/microsoftdeveloper"
+    },
+    "name": "Dip your toe into Azure Blockchain Solutions"
+  },
+  {
+    "details": {
+      "date": "2020-08-09T11:00:00.00Z",
+      "tags": ["aws", "tag2"],
+      "url": "https://www.twitch.tv/aws"
+    },
+    "name": "AWS Whats Next S1 | E8 - News, announcements, and live demos of the latest services"
+  },
+  {
+    "details": {
+      "date": "2020-08-10T19:30:00.00Z",
+      "tags": ["aws", "certifications"],
+      "url": "https://attendee.gotowebinar.com/register/8877339643201488396"
+    },
+    "name": "FREE Public AWS Study Group"
+  },
+  {
+    "details": {
+      "date": "2020-08-17T12:00:00.00Z",
+      "tags": ["cloud computing"],
+      "url": "https://cs50.email/l/hrxSDpXavtEx892ausq763o3Pg/IdN763MY6vQt5OmZiJsrZ5pw/SKI8922iEG4sXgrltsVlxb6g"
+    },
+    "name": "WHAT IS THE CLOUD? a Zoom-based discussion of cloud computing for anyone online"
+  },
+  {
+    "details": {
+      "date": "2020-08-20T08:30:00.00Z",
+      "tags": ["aws", "certifications"],
+      "url": "https://attendee.gotowebinar.com/register/8877339643201488396"
+    },
+    "name": "FREE Public AWS Study Group"
+  },
+  {
+    "details": {
+      "date": "2020-07-28T09:00:00.00Z",
+      "tags": ["azure", "certifications", "community"],
+      "url": "https://azureday.community/"
+    },
+    "name": "Virtual Azure Community Day - July 28th, 2020"
+  }
+]
