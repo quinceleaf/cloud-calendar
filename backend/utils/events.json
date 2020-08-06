@@ -3,10 +3,10 @@
     "date": "2020-07-15T20:00:00.00Z",
     "tags": [
       {
-        "id": "tag#7b0dc340-1be0-4222-957b-3194c430cc55",
+        "id": "TAG#7b0dc340-1be0-4222-957b-3194c430cc55",
         "name": "terraform"
       },
-      { "id": "tag#94df0462-dfde-4bf6-b710-1aed2f42422e", "name": "manning" }
+      { "id": "TAG#94df0462-dfde-4bf6-b710-1aed2f42422e", "name": "manning" }
     ],
     "url": "https://www.twitch.tv/manningpublications",
     "name": "Secrets Management with Terraform - Scott Winkler / Terraform in Action"
@@ -14,16 +14,16 @@
   {
     "date": "2020-07-29T10:00:00.00Z",
     "tags": [
-      { "id": "tag#94df0462-dfde-4bf6-b710-1aed2f42422e", "name": "manning" },
+      { "id": "TAG#94df0462-dfde-4bf6-b710-1aed2f42422e", "name": "manning" },
       {
-        "id": "tag#bf66e307-45d3-4300-a4d2-025a14525f7a",
+        "id": "TAG#bf66e307-45d3-4300-a4d2-025a14525f7a",
         "name": "microservices"
       },
       {
-        "id": "tag#215b1891-85f7-44d8-9bf2-f8c2686bf76a",
+        "id": "TAG#215b1891-85f7-44d8-9bf2-f8c2686bf76a",
         "name": "kubernetes"
       },
-      { "id": "tag#646ef30a-53c1-4fe9-addd-603e0b0cf286", "name": "istio" }
+      { "id": "TAG#646ef30a-53c1-4fe9-addd-603e0b0cf286", "name": "istio" }
     ],
     "url": "https://www.twitch.tv/manningpublications",
 
@@ -32,12 +32,12 @@
   {
     "date": "2020-07-06T22:00:00.00Z",
     "tags": [
-      { "id": "tag#9ef8d16c-ce8d-43a0-af04-413d7d795145", "name": "aws" },
+      { "id": "TAG#9ef8d16c-ce8d-43a0-af04-413d7d795145", "name": "aws" },
       {
-        "id": "tag#0be85da1-96ca-4bde-8055-e57dadd1b899",
+        "id": "TAG#0be85da1-96ca-4bde-8055-e57dadd1b899",
         "name": "cloudformation"
       },
-      { "id": "tag#94df0462-dfde-4bf6-b710-1aed2f42422e", "name": "manning" }
+      { "id": "TAG#94df0462-dfde-4bf6-b710-1aed2f42422e", "name": "manning" }
     ],
     "url": "https://www.twitch.tv/manningpublications",
     "name": "Chuck Gehman - The CloudFormation Stack Lifecycle / AWS CloudFormation in Action"
@@ -45,12 +45,12 @@
   {
     "date": "2020-06-25T12:00:00.00Z",
     "tags": [
-      { "id": "tag#58f16917-3eb3-4997-996c-45ed89a9e07c", "name": "azure" },
+      { "id": "TAG#58f16917-3eb3-4997-996c-45ed89a9e07c", "name": "azure" },
       {
-        "id": "tag#13e1a064-b81d-477a-9cea-0c3f85c5f065",
+        "id": "TAG#13e1a064-b81d-477a-9cea-0c3f85c5f065",
         "name": "analytics"
       },
-      { "id": "tag#94df0462-dfde-4bf6-b710-1aed2f42422e", "name": "manning" }
+      { "id": "TAG#94df0462-dfde-4bf6-b710-1aed2f42422e", "name": "manning" }
     ],
     "url": "https://www.twitch.tv/manningpublications",
     "name": "Richard Nuckolls - Azure Stream Analytics / Azure Data Engineering"
@@ -58,12 +58,12 @@
   {
     "date": "2020-08-12T09:00:00.00Z",
     "tags": [
-      { "id": "tag#9ef8d16c-ce8d-43a0-af04-413d7d795145", "name": "aws" },
+      { "id": "TAG#9ef8d16c-ce8d-43a0-af04-413d7d795145", "name": "aws" },
       {
-        "id": "tag#6194af88-a0ad-4b16-ae9b-2b1f134ded94",
+        "id": "TAG#6194af88-a0ad-4b16-ae9b-2b1f134ded94",
         "name": "containers"
       },
-      { "id": "tag#b0cd4655-6cea-473a-9722-dbe055699216", "name": "ECS" }
+      { "id": "TAG#b0cd4655-6cea-473a-9722-dbe055699216", "name": "ECS" }
     ],
     "url": "https://www.twitch.tv/aws",
     "name": "Containers from the couch: ECS Workshop!"
@@ -71,13 +71,13 @@
   {
     "date": "2020-08-14T15:30:00.00Z",
     "tags": [
-      { "id": "tag#9ef8d16c-ce8d-43a0-af04-413d7d795145", "name": "aws" },
+      { "id": "TAG#9ef8d16c-ce8d-43a0-af04-413d7d795145", "name": "aws" },
       {
-        "id": "tag#0e88277c-28d9-494e-9bbb-3de5f78d09a5",
+        "id": "TAG#0e88277c-28d9-494e-9bbb-3de5f78d09a5",
         "name": "machine learning"
       },
       {
-        "id": "tag#944d92af-a888-4dab-815c-139b8963dbb4",
+        "id": "TAG#944d92af-a888-4dab-815c-139b8963dbb4",
         "name": "sagemaker"
       }
     ],
@@ -87,9 +87,9 @@
   {
     "date": "2020-08-13T08:00:00.00Z",
     "tags": [
-      { "id": "tag#9ef8d16c-ce8d-43a0-af04-413d7d795145", "name": "aws" },
+      { "id": "TAG#9ef8d16c-ce8d-43a0-af04-413d7d795145", "name": "aws" },
       {
-        "id": "tag#19bdf4fe-652c-4ee2-9f6b-bc0af148ca2c",
+        "id": "TAG#19bdf4fe-652c-4ee2-9f6b-bc0af148ca2c",
         "name": "community"
       }
     ],
@@ -99,12 +99,12 @@
   {
     "date": "2020-08-26T16:00:00.00Z",
     "tags": [
-      { "id": "tag#9ef8d16c-ce8d-43a0-af04-413d7d795145", "name": "aws" },
+      { "id": "TAG#9ef8d16c-ce8d-43a0-af04-413d7d795145", "name": "aws" },
       {
-        "id": "tag#06213f02-ca97-47a6-ae91-d498bfdf2a94",
+        "id": "TAG#06213f02-ca97-47a6-ae91-d498bfdf2a94",
         "name": "partners"
       },
-      { "id": "tag#71d53d52-f0d1-4521-9019-6637d73fff6c", "name": "logging" }
+      { "id": "TAG#71d53d52-f0d1-4521-9019-6637d73fff6c", "name": "logging" }
     ],
     "url": "https://www.twitch.tv/aws",
     "name": "Howdy Partner! With @CHAOSSEARCH"
@@ -112,13 +112,13 @@
   {
     "date": "2020-08-06T13:15:00.00Z",
     "tags": [
-      { "id": "tag#9ef8d16c-ce8d-43a0-af04-413d7d795145", "name": "aws" },
+      { "id": "TAG#9ef8d16c-ce8d-43a0-af04-413d7d795145", "name": "aws" },
       {
-        "id": "tag#55e0bab4-488d-4ae4-9f80-81e6394bca01",
+        "id": "TAG#55e0bab4-488d-4ae4-9f80-81e6394bca01",
         "name": "new features"
       },
       {
-        "id": "tag#19bdf4fe-652c-4ee2-9f6b-bc0af148ca2c",
+        "id": "TAG#19bdf4fe-652c-4ee2-9f6b-bc0af148ca2c",
         "name": "community"
       }
     ],
@@ -128,9 +128,9 @@
   {
     "date": "2020-07-30T06:00:00.00Z",
     "tags": [
-      { "id": "tag#9ef8d16c-ce8d-43a0-af04-413d7d795145", "name": "aws" },
+      { "id": "TAG#9ef8d16c-ce8d-43a0-af04-413d7d795145", "name": "aws" },
       {
-        "id": "tag#19bdf4fe-652c-4ee2-9f6b-bc0af148ca2c",
+        "id": "TAG#19bdf4fe-652c-4ee2-9f6b-bc0af148ca2c",
         "name": "community"
       }
     ],
@@ -140,8 +140,8 @@
   {
     "date": "2020-08-05T18:00:00.00Z",
     "tags": [
-      { "id": "tag#58f16917-3eb3-4997-996c-45ed89a9e07c", "name": "azure" },
-      { "id": "tag#feab34b9-7a99-41ef-ba53-694b5aa293c4", "name": "bots" }
+      { "id": "TAG#58f16917-3eb3-4997-996c-45ed89a9e07c", "name": "azure" },
+      { "id": "TAG#feab34b9-7a99-41ef-ba53-694b5aa293c4", "name": "bots" }
     ],
     "url": "https://www.twitch.tv/microsoftdeveloper",
     "name": "The bot experience - thinking about the user"
@@ -149,8 +149,8 @@
   {
     "date": "2020-08-08T10:00:00.00Z",
     "tags": [
-      { "id": "tag#58f16917-3eb3-4997-996c-45ed89a9e07c", "name": "azure" },
-      { "id": "tag#61cf2010-4ac2-473b-9195-24fc7a8cd57b", "name": "chatbots" }
+      { "id": "TAG#58f16917-3eb3-4997-996c-45ed89a9e07c", "name": "azure" },
+      { "id": "TAG#61cf2010-4ac2-473b-9195-24fc7a8cd57b", "name": "chatbots" }
     ],
     "url": "https://www.twitch.tv/microsoftdeveloper",
     "name": "Who said that? Getting started with LUIS"
@@ -158,9 +158,9 @@
   {
     "date": "2020-07-31T20:30:00.00Z",
     "tags": [
-      { "id": "tag#58f16917-3eb3-4997-996c-45ed89a9e07c", "name": "azure" },
-      { "id": "tag#c001edea-203f-4503-a478-11ede2a62684", "name": "python" },
-      { "id": "tag#b2e43033-fe44-452b-b24c-628927f48337", "name": "mongodb" }
+      { "id": "TAG#58f16917-3eb3-4997-996c-45ed89a9e07c", "name": "azure" },
+      { "id": "TAG#c001edea-203f-4503-a478-11ede2a62684", "name": "python" },
+      { "id": "TAG#b2e43033-fe44-452b-b24c-628927f48337", "name": "mongodb" }
     ],
     "url": "https://www.twitch.tv/microsoftdeveloper",
     "name": "Twitch Tracker App: Python, PyMongo and VS Code"
@@ -168,13 +168,13 @@
   {
     "date": "2020-08-01T11:00:00.00Z",
     "tags": [
-      { "id": "tag#58f16917-3eb3-4997-996c-45ed89a9e07c", "name": "azure" },
+      { "id": "TAG#58f16917-3eb3-4997-996c-45ed89a9e07c", "name": "azure" },
       {
-        "id": "tag#d8077435-9c90-4a09-8673-64f84f808d82",
+        "id": "TAG#d8077435-9c90-4a09-8673-64f84f808d82",
         "name": "jamstack"
       },
       {
-        "id": "tag#19bdf4fe-652c-4ee2-9f6b-bc0af148ca2c",
+        "id": "TAG#19bdf4fe-652c-4ee2-9f6b-bc0af148ca2c",
         "name": "community"
       }
     ],
@@ -184,13 +184,13 @@
   {
     "date": "2020-08-09T09:00:00.00Z",
     "tags": [
-      { "id": "tag#58f16917-3eb3-4997-996c-45ed89a9e07c", "name": "azure" },
+      { "id": "TAG#58f16917-3eb3-4997-996c-45ed89a9e07c", "name": "azure" },
       {
-        "id": "tag#6194af88-a0ad-4b16-ae9b-2b1f134ded94",
+        "id": "TAG#6194af88-a0ad-4b16-ae9b-2b1f134ded94",
         "name": "functions"
       },
       {
-        "id": "tag#d4702090-c171-4bca-8923-0873ebdf901f",
+        "id": "TAG#d4702090-c171-4bca-8923-0873ebdf901f",
         "name": "notifications"
       }
     ],
@@ -200,9 +200,9 @@
   {
     "date": "2020-08-05T13:00:00.00Z",
     "tags": [
-      { "id": "tag#58f16917-3eb3-4997-996c-45ed89a9e07c", "name": "azure" },
+      { "id": "TAG#58f16917-3eb3-4997-996c-45ed89a9e07c", "name": "azure" },
       {
-        "id": "tag#a5334b0a-c334-4a7a-af36-49b3e6435f7f",
+        "id": "TAG#a5334b0a-c334-4a7a-af36-49b3e6435f7f",
         "name": "blockchain"
       }
     ],
@@ -212,13 +212,13 @@
   {
     "date": "2020-08-09T11:00:00.00Z",
     "tags": [
-      { "id": "tag#9ef8d16c-ce8d-43a0-af04-413d7d795145", "name": "aws" },
+      { "id": "TAG#9ef8d16c-ce8d-43a0-af04-413d7d795145", "name": "aws" },
       {
-        "id": "tag#55e0bab4-488d-4ae4-9f80-81e6394bca01",
+        "id": "TAG#55e0bab4-488d-4ae4-9f80-81e6394bca01",
         "name": "new features"
       },
       {
-        "id": "tag#19bdf4fe-652c-4ee2-9f6b-bc0af148ca2c",
+        "id": "TAG#19bdf4fe-652c-4ee2-9f6b-bc0af148ca2c",
         "name": "community"
       }
     ],
@@ -228,9 +228,9 @@
   {
     "date": "2020-08-10T19:30:00.00Z",
     "tags": [
-      { "id": "tag#9ef8d16c-ce8d-43a0-af04-413d7d795145", "name": "aws" },
+      { "id": "TAG#9ef8d16c-ce8d-43a0-af04-413d7d795145", "name": "aws" },
       {
-        "id": "tag#6a8cf8e8-61fc-4eca-8af9-df68dc1a6ba9",
+        "id": "TAG#6a8cf8e8-61fc-4eca-8af9-df68dc1a6ba9",
         "name": "certifications"
       }
     ],
@@ -241,7 +241,7 @@
     "date": "2020-08-17T12:00:00.00Z",
     "tags": [
       {
-        "id": "tag#c2e64ed8-7c0a-415c-bfbd-0f268a8ee618",
+        "id": "TAG#c2e64ed8-7c0a-415c-bfbd-0f268a8ee618",
         "name": "cloud (general)"
       }
     ],
@@ -251,9 +251,9 @@
   {
     "date": "2020-08-20T08:30:00.00Z",
     "tags": [
-      { "id": "tag#9ef8d16c-ce8d-43a0-af04-413d7d795145", "name": "aws" },
+      { "id": "TAG#9ef8d16c-ce8d-43a0-af04-413d7d795145", "name": "aws" },
       {
-        "id": "tag#6a8cf8e8-61fc-4eca-8af9-df68dc1a6ba9",
+        "id": "TAG#6a8cf8e8-61fc-4eca-8af9-df68dc1a6ba9",
         "name": "certifications"
       }
     ],
@@ -263,13 +263,13 @@
   {
     "date": "2020-07-28T09:00:00.00Z",
     "tags": [
-      { "id": "tag#58f16917-3eb3-4997-996c-45ed89a9e07c", "name": "azure" },
+      { "id": "TAG#58f16917-3eb3-4997-996c-45ed89a9e07c", "name": "azure" },
       {
-        "id": "tag#6a8cf8e8-61fc-4eca-8af9-df68dc1a6ba9",
+        "id": "TAG#6a8cf8e8-61fc-4eca-8af9-df68dc1a6ba9",
         "name": "certifications"
       },
       {
-        "id": "tag#19bdf4fe-652c-4ee2-9f6b-bc0af148ca2c",
+        "id": "TAG#19bdf4fe-652c-4ee2-9f6b-bc0af148ca2c",
         "name": "community"
       }
     ],
