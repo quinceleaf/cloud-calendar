@@ -23,7 +23,7 @@ def load_data(events, tags, dynamodb=None):
     counter_tags = 0
     for tag in tag_list:
 
-        # Creat tag record
+        # Create tag record
         table.put_item(
             Item={
                 "PK": tag["id"],
@@ -37,7 +37,7 @@ def load_data(events, tags, dynamodb=None):
     counter_events = 0
     counter_event_tag_relations = 0
     for event in event_list:
-        insert_uuid = f"EVENT{uuid.uuid4()}"
+        insert_uuid = f"EVENT#{uuid.uuid4()}"
 
         # Create event record
         table.put_item(
