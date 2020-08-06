@@ -1,16 +1,19 @@
 from pprint import pprint
-import uuid
 import boto3
-
-event_to_delete = "EVENT#52f41678-301d-4737-adbc-eb0add776508"
+from boto3.dynamodb.conditions import Key, Attr
 
 # Settings
 LOCAL_DYNAMODB = False
 LOCAL_DYNAMODB_CONNECTION = "http://localhost:8000"
 REGION = "us-east-1"
 
+# Parameters
+# valid model names are:
+# EVENT
+# TAG
 
-def delete_event(id, dynamodb=None):
+
+def query_by_model(model, dynamodb=None):
     if not dynamodb:
         if LOCAL_DYNAMODB:
             dynamodb = boto3.resource(
@@ -20,12 +23,13 @@ def delete_event(id, dynamodb=None):
             dynamodb = boto3.resource("dynamodb", region_name=REGION)
 
     table = dynamodb.Table("Events")
-    response = table.delete_item(Key={"PK": id, "SK": id,},)
-
-    return response
+    response = table.query(
+        IndexName="GSI2-getObjectsByModel",
+        KeyConditionExpression=Key("model").eq(model),
+    )
+    return response["Items"]
 
 
 if __name__ == "__main__":
-    event_response = delete_event(event_to_delete)
-    print("Delete event succeeded:")
-    pprint(event_response, sort_dicts=False)
+    query_result = query_by_model("EVENT")
+    pprint(query_result, sort_dicts=False)

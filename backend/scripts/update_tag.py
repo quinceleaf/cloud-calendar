@@ -17,7 +17,7 @@ new_tag = {
 }
 
 # Settings
-LOCAL_DYNAMODB = True
+LOCAL_DYNAMODB = False
 LOCAL_DYNAMODB_CONNECTION = "http://localhost:8000"
 REGION = "us-east-1"
 
@@ -27,6 +27,8 @@ REGION = "us-east-1"
 # PK/SK as necessary to run this
 
 # NOTE only name is a logical candidate for update/change
+
+# TO-DO : Query and update any event-tag relations that contain updated attributes
 
 
 def update_tag(tag, dynamodb=None):

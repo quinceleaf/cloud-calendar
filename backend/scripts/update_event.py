@@ -23,7 +23,7 @@ new_event = {
 }
 
 # Settings
-LOCAL_DYNAMODB = True
+LOCAL_DYNAMODB = False
 LOCAL_DYNAMODB_CONNECTION = "http://localhost:8000"
 REGION = "us-east-1"
 
