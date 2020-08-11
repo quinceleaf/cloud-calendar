@@ -27,18 +27,18 @@ def create_event_table(dynamodb=None):
             {"AttributeName": "model", "AttributeType": "S"},
             {"AttributeName": "GSI1-PK", "AttributeType": "S"},
         ],
-        ProvisionedThroughput={"ReadCapacityUnits": 1, "WriteCapacityUnits": 1},
+        ProvisionedThroughput={"ReadCapacityUnits": 3, "WriteCapacityUnits": 4},
         GlobalSecondaryIndexes=[
             {
-                "IndexName": "GSI1-getEventsForTag",
+                "IndexName": "GSI1-getEventsForRelation",
                 "KeySchema": [
                     {"AttributeName": "GSI1-PK", "KeyType": "HASH"},
                     {"AttributeName": "PK", "KeyType": "RANGE"},
                 ],
                 "Projection": {"ProjectionType": "ALL",},
                 "ProvisionedThroughput": {
-                    "ReadCapacityUnits": 1,
-                    "WriteCapacityUnits": 1,
+                    "ReadCapacityUnits": 2,
+                    "WriteCapacityUnits": 3,
                 },
             },
             {
@@ -49,8 +49,20 @@ def create_event_table(dynamodb=None):
                 ],
                 "Projection": {"ProjectionType": "ALL",},
                 "ProvisionedThroughput": {
-                    "ReadCapacityUnits": 1,
-                    "WriteCapacityUnits": 1,
+                    "ReadCapacityUnits": 2,
+                    "WriteCapacityUnits": 3,
+                },
+            },
+            {
+                "IndexName": "GSI3-inverted",
+                "KeySchema": [
+                    {"AttributeName": "SK", "KeyType": "HASH"},
+                    {"AttributeName": "PK", "KeyType": "RANGE"},
+                ],
+                "Projection": {"ProjectionType": "ALL",},
+                "ProvisionedThroughput": {
+                    "ReadCapacityUnits": 2,
+                    "WriteCapacityUnits": 3,
                 },
             },
         ],

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "ORG#a9f44f16-7eb0-4673-949a-bab3881d307e",
+    "name": "AICamp",
+    "url": "https://learn.xnextcon.com"
+  },
+  {
+    "id": "ORG#b98d4e0a-9482-4e93-bfe9-019e02c92e2f",
+    "name": "Amazon Web Services",
+    "url": "https://aws.amazon.com"
+  },
+  {
+    "id": "ORG#cb4e4ae7-6a60-4339-8935-e6f65e834a62",
+    "name": "Microsoft Azure",
+    "url": "https://azure.microsoft.com"
+  },
+  {
+    "id": "ORG#8aa90e51-07d3-4d0e-a9cf-1693d6d1dbbe",
+    "name": "Google Cloud",
+    "url": "https://cloud.google.com"
+  },
+  {
+    "id": "ORG#28302b55-1840-4d2f-b869-95a0871c74c6",
+    "name": "Manning Publications",
+    "url": "https://manning.com"
+  },
+  {
+    "id": "ORG#996813f6-9d92-4f35-9998-9110a85d9fc8",
+    "name": "Harvard University CS50",
+    "url": "https://cs50.harvard.edu/"
+  }
+]
