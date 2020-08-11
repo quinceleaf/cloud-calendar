@@ -6,10 +6,8 @@ from boto3.dynamodb.conditions import Key, Attr
 
 
 def lambda_handler(event, context):
-    # client = boto3.resource('dynamodb')
-    dynamodb = boto3.client("dynamodb")
 
-    # table = client.Table("Events")
+    dynamodb = boto3.client("dynamodb")
 
     response = {
         "isBase64Encoded": "false",
@@ -106,15 +104,14 @@ def lambda_handler(event, context):
         transaction_queue.append(relation_create)
 
     try:
-        response = dynamodb.transact_write_items(TransactItems=transaction_queue)
+        results = dynamodb.transact_write_items(TransactItems=transaction_queue)
         response_message = (
             f"Created event {event_id} and {len(transaction_queue)-1} relations"
         )
         print(response_message)
         response["statusCode"] = 200
-        # return True
+
     except Exception as e:
-        error_flag = True
         response_message = f"ERROR could not create event {event_id} and {len(transaction_queue)-1} relations"
         print(response_message)
         print(e)

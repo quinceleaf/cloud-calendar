@@ -14,10 +14,12 @@ def lambda_handler(event, context):
         "headers": {},
     }
 
-    event_id = f"EVENT#{event['pathParameters']['id']}"
+    tag_id = f"ORG#{event['pathParameters']['id']}"
 
     # query all records (event and relations) to delete
-    records_to_delete = table.query(KeyConditionExpression=Key("PK").eq(event_id),)
+    records_to_delete = table.query(
+        IndexName="GSI3-inverted", KeyConditionExpression=Key("SK").eq(tag_id),
+    )
     print(f"{len(records_to_delete['Items'])} records to delete")
 
     transaction_queue = []
@@ -34,13 +36,13 @@ def lambda_handler(event, context):
     try:
         results = dynamodb.transact_write_items(TransactItems=transaction_queue)
         response_message = (
-            f"Deleted event {event_id} and {len(transaction_queue)-1} relations"
+            f"Deleted organization {tag_id} and {len(transaction_queue)-1} relations"
         )
         print(response_message)
         response["statusCode"] = 200
     except Exception as e:
         error_flag = True
-        response_message = f"ERROR could not delete event {event_id} and {len(transaction_queue)-1} relations"
+        response_message = f"ERROR could not delete organization {tag_id} and {len(transaction_queue)-1} relations"
         print(response_message)
         print(e)
         response["statusCode"] = 500

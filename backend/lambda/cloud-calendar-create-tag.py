@@ -1,3 +1,4 @@
+import datetime as dt
 import json
 import uuid
 import boto3
@@ -13,22 +14,30 @@ def lambda_handler(event, context):
         "headers": {},
     }
 
-    payload = json.loads(event["body"])["tag"]
+    payload = json.loads(event["body"])
 
     tag_id = f"TAG#{uuid.uuid4()}"
     tag_model = "TAG"
     tag_name = payload["name"]
+    date_added = dt.datetime.now().isoformat()
+    date_updated = dt.datetime.now().isoformat()
 
     try:
         results = table.update_item(
             Key={"PK": tag_id, "SK": tag_id},
-            UpdateExpression="SET #name=:n, model=:m",
-            ExpressionAttributeValues={":n": tag_name, ":m": tag_model},
+            UpdateExpression="SET #name=:n, model=:m, date_added=:dta, date_updated=:dtu",
+            ExpressionAttributeValues={
+                ":n": tag_name,
+                ":m": tag_model,
+                ":dta": date_added,
+                ":dtu": date_updated,
+            },
             ExpressionAttributeNames={"#name": "name"},
             ReturnValues="ALL_NEW",
         )
         response["statusCode"] = 200
         response["body"] = json.dumps(results["Attributes"])
+
     except:
         response["statusCode"] = 500
         response_message = f"ERROR Could not create tag item {tag_id} {tag_name}"
