@@ -1,3 +1,6 @@
+import "react-datepicker/dist/react-datepicker.css";
+import "reoverlay/lib/ModalWrapper.css";
+
 import "../styles/index.css";
 
 // The following import prevents a Font Awesome icon server-side rendering bug,
