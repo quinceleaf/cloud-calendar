@@ -25,15 +25,15 @@ def create_event_table(dynamodb=None):
             {"AttributeName": "PK", "AttributeType": "S"},
             {"AttributeName": "SK", "AttributeType": "S"},
             {"AttributeName": "model", "AttributeType": "S"},
-            {"AttributeName": "GSI1-PK", "AttributeType": "S"},
+            {"AttributeName": "date", "AttributeType": "S"},
         ],
-        ProvisionedThroughput={"ReadCapacityUnits": 3, "WriteCapacityUnits": 4},
+        ProvisionedThroughput={"ReadCapacityUnits": 2, "WriteCapacityUnits": 3},
         GlobalSecondaryIndexes=[
             {
-                "IndexName": "GSI1-getEventsForRelation",
+                "IndexName": "GSI1-getEventsByDate",
                 "KeySchema": [
-                    {"AttributeName": "GSI1-PK", "KeyType": "HASH"},
-                    {"AttributeName": "PK", "KeyType": "RANGE"},
+                    {"AttributeName": "model", "KeyType": "HASH"},
+                    {"AttributeName": "date", "KeyType": "RANGE"},
                 ],
                 "Projection": {"ProjectionType": "ALL",},
                 "ProvisionedThroughput": {
