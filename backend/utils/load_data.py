@@ -15,6 +15,11 @@ def convert_timestamp(timestamp):
     return dt.datetime.isoformat(k)
 
 
+def generate_epoch(timestamp):
+    k = dt.datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S.%f%z")
+    return k.strftime("%s")
+
+
 def load_data(tags, orgs, events, dynamodb=None):
     if not dynamodb:
         if LOCAL_DYNAMODB:
@@ -74,6 +79,7 @@ def load_data(tags, orgs, events, dynamodb=None):
 
     for event in events:
         insert_uuid = f"EVENT#{uuid.uuid4()}"
+        expires = generate_epoch(event["date"])
 
         # tag_list = [{"id": tag["id"], "name": tag[] for tag in event["tags"]]
 
@@ -90,6 +96,7 @@ def load_data(tags, orgs, events, dynamodb=None):
                     "description": event.get("description", None),
                     "date_added": dt.datetime.now().isoformat(),
                     "date_updated": dt.datetime.now().isoformat(),
+                    "expires": expires,
                 }
             )
             counter_events += 1
@@ -108,11 +115,11 @@ def load_data(tags, orgs, events, dynamodb=None):
                         "name": event["name"],
                         "url": event["url"],
                         "model": "TAG-RELATION",
-                        "GSI1-PK": tag["id"],
                         "relation_name": tag["name"],
                         "description": event.get("description", None),
                         "date_added": dt.datetime.now().isoformat(),
                         "date_updated": dt.datetime.now().isoformat(),
+                        "expires": expires,
                     }
                 )
                 counter_event_tag_relations += 1
@@ -132,11 +139,11 @@ def load_data(tags, orgs, events, dynamodb=None):
                         "name": event["name"],
                         "url": event["url"],
                         "model": "ORG-RELATION",
-                        "GSI1-PK": org["id"],
                         "relation_name": org["name"],
                         "description": event.get("description", None),
                         "date_added": dt.datetime.now().isoformat(),
                         "date_updated": dt.datetime.now().isoformat(),
+                        "expires": expires,
                     }
                 )
                 counter_event_org_relations += 1
@@ -155,6 +162,7 @@ def load_data(tags, orgs, events, dynamodb=None):
 
 
 if __name__ == "__main__":
+    print(f"Current file")
     with open("tags.json") as json_tags_file:
         with open("orgs.json") as json_orgs_file:
             with open("events.json") as json_events_file:
