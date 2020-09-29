@@ -7,7 +7,8 @@
     "dev": "next",
     "build": "npm run build:style && next build",
     "build:style": "postcss styles/tailwind.css -o public/build/tailwind.css",
-    "start": "npm run build:style && next start"
+    "start": "npm run build:style && next start",
+    "export": "next export"
   },
   "keywords": [],
   "author": "",
@@ -17,22 +18,25 @@
   },
   "homepage": "https://github.com/quinceleaf/cloud-calendar#readme",
   "dependencies": {
-    "@material-ui/core": "^4.11.0",
-    "@material-ui/icons": "^4.9.1",
     "autoprefixer": "^9.8.6",
     "axios": "^0.19.2",
-    "date-fns": "^2.15.0",
-    "dayjs": "^1.8.35",
+    "date-fns": "^2.16.1",
+    "date-fns-tz": "^1.0.10",
     "formik": "^2.1.5",
     "next": "^9.5.2",
     "postcss-cli": "^7.1.1",
     "react": "^16.13.1",
     "react-datepicker": "^3.1.3",
     "react-dom": "^16.13.1",
-    "react-query": "^2.5.13",
-    "react-query-devtools": "^2.4.2",
+    "react-icons": "^3.11.0",
+    "react-query": "^2.23.0",
+    "react-query-devtools": "^2.5.0",
+    "react-select": "^3.1.0",
+    "react-toast-notifications": "^2.4.0",
     "reoverlay": "^1.0.0",
+    "swr": "^0.3.4",
     "tailwindcss": "^1.6.2",
+    "tz-ids": "^1.0.0",
     "yup": "^0.29.3"
   }
 }

@@ -4,12 +4,11 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-pylint = "*"
-black = "*"
 
 [packages]
 boto3 = "*"
 awscli = "*"
+aws-sam-cli = "*"
 
 [requires]
 python_version = "3.8"

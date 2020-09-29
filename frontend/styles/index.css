@@ -5,3 +5,30 @@
 body {
   font-family: "Fira Sans", sans-serif;
 }
+
+/* to override React Datepicker default */
+.customDatePickerWidth,
+.customDatePickerWidth > div.react-datepicker-wrapper,
+.customDatePickerWidth
+  > div
+  > div.react-datepicker__input-container
+  .customDatePickerWidth
+  > div
+  > div.react-datepicker__input-container
+  input {
+  width: 100%;
+  min-width: 100%;
+}
+
+.tag + .tag::before {
+  display: inline-block;
+  white-space: pre;
+  color: rgba(66, 153, 225, var(--text-opacity));
+  content: ", ";
+}
+
+.notification-container {
+  font-size: 14px;
+  box-sizing: border-box;
+  position: fixed;
+}
