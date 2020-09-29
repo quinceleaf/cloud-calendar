@@ -4,7 +4,7 @@ from boto3.dynamodb.conditions import Key, Attr
 
 
 def consolidate_collection(results):
-    return_data = {"orgs": [], "tags": []}
+    return_data = {"organizations": [], "tags": []}
 
     for record in results:
         if record["model"] == "EVENT":
@@ -16,29 +16,31 @@ def consolidate_collection(results):
                 else:
                     return_data[key] = record[key]
         elif record["model"] == "ORG-RELATION":
-            return_data["orgs"].append(
+            return_data["organizations"].append(
                 {"id": record["SK"].split("#")[1], "name": record["relation_name"]}
             )
         elif record["model"] == "TAG-RELATION":
             return_data["tags"].append(
                 {"id": record["SK"].split("#")[1], "name": record["relation_name"]}
             )
+        return_data["expires"] = int(record["expires"])
 
     return return_data
 
 
 def consolidate_related(results):
-    return_data = {"orgs": [], "tags": []}
+    return_data = {"organizations": [], "tags": []}
 
     for record in results:
         if record["model"] == "ORG-RELATION":
-            return_data["orgs"].append(
+            return_data["organizations"].append(
                 {"id": record["SK"].split("#")[1], "name": record["relation_name"]}
             )
         elif record["model"] == "TAG-RELATION":
             return_data["tags"].append(
                 {"id": record["SK"].split("#")[1], "name": record["relation_name"]}
             )
+        return_data["expires"] = int(record["expires"])
 
     return return_data
 
@@ -51,6 +53,8 @@ def transform_results(results):
         for key, value in results.items():
             if key == "PK":
                 temp["id"] = results[key].split("#")[1]
+            elif key == "expires":
+                temp["expires"] = int(results[key])
             else:
                 temp[key] = results[key]
         return_data.append(temp)
@@ -61,6 +65,8 @@ def transform_results(results):
             for key, value in record.items():
                 if key == "PK":
                     temp["id"] = record[key].split("#")[1]
+                elif key == "expires":
+                    temp["expires"] = int(results[key])
                 else:
                     temp[key] = record[key]
             return_data.append(temp)
@@ -91,7 +97,16 @@ def lambda_handler(event, context):
     ].get("related", False)
 
     if isCollectionQuery:
-        results = table.query(KeyConditionExpression=Key("PK").eq(event_id),)
+        results = table.query(
+            KeyConditionExpression=Key("PK").eq(event_id),
+            ProjectionExpression="PK,SK,#name,#date,#timezone,expires,#url,description,model,date_added,date_updated",
+            ExpressionAttributeNames={
+                "#date": "date",
+                "#timezone": "timezone",
+                "#name": "name",
+                "#url": "url",
+            },
+        )
         conv_results = consolidate_collection(results["Items"])
     elif isRelatedQuery:
         results = table.query(
@@ -102,8 +117,13 @@ def lambda_handler(event, context):
     else:
         results = table.get_item(
             Key={"PK": event_id, "SK": event_id},
-            ProjectionExpression="PK,#name,#date,#url,description,date_added,date_updated",
-            ExpressionAttributeNames={"#date": "date", "#name": "name", "#url": "url"},
+            ProjectionExpression="PK,SK,#name,#date,#timezone,expires,#url,description,model,date_added,date_updated",
+            ExpressionAttributeNames={
+                "#date": "date",
+                "#timezone": "timezone",
+                "#name": "name",
+                "#url": "url",
+            },
         )
         conv_results = transform_results(results["Item"])
 

@@ -11,7 +11,11 @@ def lambda_handler(event, context):
 
     response = {
         "isBase64Encoded": "false",
-        "headers": {},
+        "headers": {
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+        },
     }
 
     event_id = f"EVENT#{event['pathParameters']['id']}"

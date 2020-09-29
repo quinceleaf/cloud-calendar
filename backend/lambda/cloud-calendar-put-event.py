@@ -19,7 +19,7 @@ def det_changes(existing_data, new_data):
         for record in new_data.get("tags", [])
     ] + [
         {"id": f"ORG#{record['id']}", "name": record["name"]}
-        for record in new_data.get("orgs", [])
+        for record in new_data.get("organizations", [])
     ]
 
     to_add = [val for val in conv_new if val not in conv_existing]
@@ -41,19 +41,28 @@ def lambda_handler(event, context):
 
     response = {
         "isBase64Encoded": "false",
-        "headers": {},
+        "headers": {
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+        },
     }
 
     payload = json.loads(event["body"])
 
-    event_id = f"EVENT#{event['pathParameters']['id']}"
-    event_date = payload["date"]
+    base_id = event["pathParameters"]["id"]
+    event_id = f"EVENT#{base_id}"
+    event_date = payload["date"]  # passed as UTC ISO string
+    event_expires = str(payload["expires"])
+    event_timezone = payload["timezone"]  # original timezone of event
     event_description = payload.get("description", None)
     event_model = "EVENT"
     event_name = payload["name"]
     event_tags = payload.get("tags", [])
-    event_orgs = payload.get("orgs", [])
+    event_orgs = payload.get("organizations", [])
     event_url = payload["url"]
+    event_date_added = payload["date_added"]
+    event_date_updated = dt.datetime.now().isoformat()
 
     # put event
     # put event-tag relations
@@ -96,15 +105,18 @@ def lambda_handler(event, context):
                     "PK": {"S": event_id},
                     "SK": {"S": record["id"]},
                     "date": {"S": event_date},
+                    "expires": {"S": event_expires},
+                    "timezone": {"S": event_timezone},
                     "description": {"S": event_description},
                     "model": {"S": f"{record['id'].split('#')[0]}-RELATION"},
                     "name": {"S": event_name},
                     "url": {"S": event_url},
                     "relation_name": {"S": record["name"]},
-                    "GSI1-PK": {"S": record["id"]},
-                    "date_added": {"S": dt.datetime.now().isoformat()},
-                    "date_updated": {"S": dt.datetime.now().isoformat()},
+                    "date_added": {"S": event_date_added},
+                    "date_updated": {"S": event_date_updated},
                 },
+                "ConditionExpression": "attribute_not_exists(SK)",
+                "ReturnValuesOnConditionCheckFailure": "ALL_OLD",
             },
         }
         transaction_queue.append(relation_add)
@@ -124,15 +136,17 @@ def lambda_handler(event, context):
                 "Put": {
                     "TableName": "Events",
                     "Item": {
-                        "PK": {"S": record["PK"]},
-                        "SK": {"S": record["SK"]},
+                        "PK": {"S": event_id},
+                        "SK": {"S": event_id},
                         "date": {"S": event_date},
+                        "expires": {"S": event_expires},
+                        "timezone": {"S": event_timezone},
                         "description": {"S": event_description},
                         "model": {"S": record["model"]},
                         "name": {"S": event_name},
                         "url": {"S": event_url},
-                        "date_added": {"S": record["date_added"]},
-                        "date_updated": {"S": dt.datetime.now().isoformat()},
+                        "date_added": {"S": event_date_added},
+                        "date_updated": {"S": event_date_updated},
                     },
                 },
             }
@@ -141,17 +155,18 @@ def lambda_handler(event, context):
                 "Put": {
                     "TableName": "Events",
                     "Item": {
-                        "PK": {"S": record["PK"]},
+                        "PK": {"S": event_id},
                         "SK": {"S": record["SK"]},
                         "date": {"S": event_date},
+                        "expires": {"S": event_expires},
+                        "timezone": {"S": event_timezone},
                         "description": {"S": event_description},
                         "model": {"S": record["model"]},
                         "name": {"S": event_name},
                         "relation_name": {"S": record.get("relation_name")},
-                        "GSI1-PK": {"S": record.get("GSI1-PK")},
                         "url": {"S": event_url},
-                        "date_added": {"S": record["date_added"]},
-                        "date_updated": {"S": dt.datetime.now().isoformat()},
+                        "date_added": {"S": event_date_added},
+                        "date_updated": {"S": event_date_updated},
                     },
                 },
             }
@@ -162,14 +177,29 @@ def lambda_handler(event, context):
 
     try:
         results = dynamodb.transact_write_items(TransactItems=transaction_queue)
-        response_message = (
-            f"Updated event {event_id} and {len(transaction_queue)-1} relations"
-        )
-        print(response_message)
-        response["statusCode"] = 200
+        response_info = {}
+        response_info["status"] = "success"
+        response_info["data"] = {
+            "id": base_id,
+            "date": event_date,
+            "expires": event_expires,
+            "timezone": event_timezone,
+            "description": event_description,
+            "model": event_model,
+            "name": event_name,
+            "url": event_url,
+            "date_added": event_date_added,
+            "date_updated": event_date_updated,
+        }
+        response_info[
+            "message"
+        ] = f"Updated event {base_id} and {len(transaction_queue)-1} relations"
+        response_message = json.dumps(response_info)
+        print(f"Updated event {base_id} and {len(transaction_queue)-1} relations")
+        response["statusCode"] = 201
 
     except Exception as e:
-        response_message = f"ERROR could not update event {event_id} and {len(transaction_queue)-1} relations"
+        response_message = f"ERROR could not update event {base_id} and {len(transaction_queue)-1} relations"
         print(response_message)
         print(e)
         response["statusCode"] = 500

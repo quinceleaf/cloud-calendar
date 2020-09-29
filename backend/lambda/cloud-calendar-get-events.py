@@ -29,26 +29,30 @@ def lambda_handler(event, context):
         tag_id = event["queryStringParameters"]["tagId"]
         print(f"Filtering by tag: {tag_id}")
         results = table.query(
-            # IndexName="GSI3-inverted",
-            # KeyConditionExpression=Key("SK").eq(f"TAG#{tag_id}"),
-            # ProjectionExpression="PK,#name,#date,#url,tag_name",
-            # ExpressionAttributeNames={"#date": "date", "#name": "name", "#url": "url",},
-            # FilterExpression=Attr("model").eq("TAG-RELATION")
-            # & Attr("date").gte(date_threshold),
             IndexName="GSI1-getEventsByDate",
             KeyConditionExpression=Key("model").eq("TAG-RELATION")
             & Key("date").gte(date_threshold),
-            ProjectionExpression="PK,#name,#date,#url,description",
-            ExpressionAttributeNames={"#date": "date", "#name": "name", "#url": "url",},
+            ProjectionExpression="PK,SK,#name,#date,#timezone,expires,#url,description,model,date_added,date_updated",
+            ExpressionAttributeNames={
+                "#date": "date",
+                "#timezone": "timezone",
+                "#name": "name",
+                "#url": "url",
+            },
             FilterExpression=Attr("SK").eq(f"TAG#{tag_id}"),
         )
     else:
         results = table.query(
             IndexName="GSI1-getEventsByDate",
-            KeyConditionExpression=Key("model").eq("EVENT"),
-            ProjectionExpression="PK,#name,#date,#url,description",
-            ExpressionAttributeNames={"#date": "date", "#name": "name", "#url": "url",},
-            FilterExpression=Attr("date").gte(date_threshold),
+            KeyConditionExpression=Key("model").eq("EVENT")
+            & Key("date").gte(date_threshold),
+            ProjectionExpression="PK,#name,#date,#timezone,expires,#url,description,model,date_added,date_updated",
+            ExpressionAttributeNames={
+                "#date": "date",
+                "#timezone": "timezone",
+                "#name": "name",
+                "#url": "url",
+            },
         )
 
     response["statusCode"] = 200
@@ -67,6 +71,8 @@ def transform_results(results):
         for key, value in record.items():
             if key == "PK":
                 temp["id"] = record[key].split("#")[1]
+            if key == "expires":
+                temp["expires"] = int(record[key])
             else:
                 temp[key] = record[key]
         return_data.append(temp)
