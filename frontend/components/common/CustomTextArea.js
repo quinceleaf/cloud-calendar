@@ -10,9 +10,11 @@ const CustomTextarea = ({
   required,
   placeholder,
   className,
+  size,
   touched,
   errors,
 }) => {
+  const textareaRows = size === "large" ? 10 : size === "medium" ? 7 : 4;
   return (
     <div className={className || "mt-4 w-full"}>
       <label htmlFor={inputId} className="text-sm text-gray-600">
@@ -27,6 +29,7 @@ const CustomTextarea = ({
         value={field.value}
         name={field.name}
         placeholder={placeholder}
+        rows={textareaRows}
       ></textarea>
       <Error
         touched={form.touched[field.name]}
