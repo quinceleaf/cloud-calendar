@@ -24,7 +24,8 @@ const TagForm = ({
   initialValues = null,
   submitText,
   onSubmit,
-  setTagState,
+  calendarState,
+  setCalendarState,
   confirmDelete,
 }) => {
   const handleOnSubmit = async (values, actions) => {
@@ -54,7 +55,13 @@ const TagForm = ({
 
         {action == "edit" && (
           <CustomButton
-            onClick={() => setTagState({ action: "list", id: null })}
+            onClick={() =>
+              setCalendarState({
+                ...calendarState,
+                viewAction: "list",
+                viewId: null,
+              })
+            }
             text="Cancel"
           />
         )}
@@ -70,7 +77,13 @@ const TagForm = ({
 
         {action == "add" && (
           <CustomButton
-            onClick={() => setTagState({ action: "list", id: null })}
+            onClick={() =>
+              setCalendarState({
+                ...calendarState,
+                viewAction: "list",
+                viewId: null,
+              })
+            }
             text="Cancel"
           />
         )}
