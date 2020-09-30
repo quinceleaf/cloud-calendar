@@ -20,13 +20,17 @@ def lambda_handler(event, context):
     }
 
     is_tag_query = False
+    is_organization_query = False
     date_threshold = dt.date.today().isoformat()
 
     if event.get("queryStringParameters", False):
-        is_tag_query = event["queryStringParameters"].get("tagId", False)
+        is_tag_query = event["queryStringParameters"].get("tag", False)
+        is_organization_query = event["queryStringParameters"].get(
+            "organization", False
+        )
 
     if is_tag_query:
-        tag_id = event["queryStringParameters"]["tagId"]
+        tag_id = event["queryStringParameters"]["tag"]
         print(f"Filtering by tag: {tag_id}")
         results = table.query(
             IndexName="GSI1-getEventsByDate",
@@ -40,6 +44,22 @@ def lambda_handler(event, context):
                 "#url": "url",
             },
             FilterExpression=Attr("SK").eq(f"TAG#{tag_id}"),
+        )
+    elif is_organization_query:
+        organization_id = event["queryStringParameters"]["organization"]
+        print(f"Filtering by organization: {organization_id}")
+        results = table.query(
+            IndexName="GSI1-getEventsByDate",
+            KeyConditionExpression=Key("model").eq("ORG-RELATION")
+            & Key("date").gte(date_threshold),
+            ProjectionExpression="PK,SK,#name,#date,#timezone,expires,#url,description,model,date_added,date_updated",
+            ExpressionAttributeNames={
+                "#date": "date",
+                "#timezone": "timezone",
+                "#name": "name",
+                "#url": "url",
+            },
+            FilterExpression=Attr("SK").eq(f"ORG#{organization_id}"),
         )
     else:
         results = table.query(
