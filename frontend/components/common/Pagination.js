@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Router from "next/router";
-
-import Link from "next/link";
 
 import {
   MdNavigateBefore,
@@ -18,9 +15,6 @@ const Pagination = ({ pageSize, totalObjects, page, goToPage, isFiltered }) => {
   }
 
   let renderNavigation = true;
-  // if (pageNumbers.length <= 10) {
-  //   renderNavigation = false;
-  // }
 
   let setActiveFirst = true;
   let setActivePrevious = true;
@@ -197,6 +191,10 @@ const Pagination = ({ pageSize, totalObjects, page, goToPage, isFiltered }) => {
     }
   };
 
+  const adjustForFilter = () => {
+    isFiltered && page > pageNumbers.length ? goToPage(1) : null;
+  };
+
   return (
     <div className=" mt-4">
       <nav className="relative z-0 inline-flex shadow-sm">
@@ -205,6 +203,7 @@ const Pagination = ({ pageSize, totalObjects, page, goToPage, isFiltered }) => {
         {renderPageNumbers()}
         {renderNext()}
         {renderGoToLastPage()}
+        {adjustForFilter()}
       </nav>
     </div>
   );

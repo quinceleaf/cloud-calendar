@@ -8,7 +8,6 @@ const SearchBar = ({ setFilter, placeholderText, resetPage }) => {
         placeholder={`${placeholderText}...` || "Filter objects..."}
         onChange={(e) => setFilter(e.target.value)}
         value={undefined}
-        // onClick={resetPage(1)}
       />
     </div>
   );
