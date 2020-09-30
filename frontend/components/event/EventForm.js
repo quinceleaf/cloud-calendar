@@ -63,10 +63,6 @@ const EventForm = ({
   tagData,
   orgData,
 }) => {
-  // console.log("eventData within EF:", initialValues);
-  // console.log("tagData within EF:", tagData);
-  // console.log("orgData within EF:", orgData);
-
   const eventTimezoneOptions = tzIds ? convertTimezonesForSelect(tzIds) : [];
 
   const initialTagOptions = initialValues

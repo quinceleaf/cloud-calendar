@@ -1,8 +1,6 @@
 import React from "react";
-
 import axios from "axios";
 import { MdEvent, MdRemoveCircleOutline } from "react-icons/md";
-
 import { useQuery } from "react-query";
 import { Reoverlay } from "reoverlay";
 
@@ -13,21 +11,24 @@ import {
   SearchBar,
   Updating,
 } from "../common";
-
 import { SetTimezoneModal } from "../modals";
 import { apiEventData } from "../../api/api";
 import { displayDateInUserTimezone } from "../../helpers/timeFunctions";
 import { filterList, paginateList } from "../../helpers/listFunctions";
 
-const EventList = ({
+const EventsByOrganization = ({
   calendarState,
   setCalendarState,
   listProps,
   displayTimezone,
 }) => {
-  const eventsQuery = useQuery(
-    "events",
-    () => axios.get(apiEventData).then((res) => res.data),
+  const eventsByOrganizationQuery = useQuery(
+    ["eventsByOrganization", calendarState.screenById],
+
+    () =>
+      axios
+        .get(`${apiEventData}?organization=${calendarState.screenById}`)
+        .then((res) => res.data),
     {
       refetchAllOnWindowFocus: false,
       retry: 1,
@@ -35,12 +36,12 @@ const EventList = ({
     }
   );
 
-  const filteredList = eventsQuery.isLoading
+  const filteredList = eventsByOrganizationQuery.isLoading
     ? []
-    : eventsQuery.isError
+    : eventsByOrganizationQuery.isError
     ? []
-    : eventsQuery.data
-    ? filterList(eventsQuery.data, "name", listProps.filterTerm)
+    : eventsByOrganizationQuery.data
+    ? filterList(eventsByOrganizationQuery.data, "name", listProps.filterTerm)
     : [];
 
   const pagedList = paginateList(
@@ -64,7 +65,7 @@ const EventList = ({
               Events
             </div>
             <div className="ml-2">
-              {eventsQuery.isFetching ? <Updating /> : null}
+              {eventsByOrganizationQuery.isFetching ? <Updating /> : null}
             </div>
           </div>
 
@@ -142,11 +143,11 @@ const EventList = ({
         {renderTopPanel()}
 
         <div>
-          {eventsQuery.isLoading ? (
+          {eventsByOrganizationQuery.isLoading ? (
             <Loading />
-          ) : eventsQuery.isError ? (
+          ) : eventsByOrganizationQuery.isError ? (
             <div className="mt-2 text-gray-500">
-              Error: {eventsQuery.error.message}
+              Error: {eventsByOrganizationQuery.error.message}
             </div>
           ) : pagedList.length === 0 ? (
             <div className="mt-4 text-gray-500">No upcoming events</div>
@@ -203,4 +204,4 @@ const EventList = ({
   );
 };
 
-export default EventList;
+export default EventsByOrganization;

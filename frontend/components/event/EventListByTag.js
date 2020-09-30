@@ -2,7 +2,6 @@ import React from "react";
 
 import axios from "axios";
 import { MdEvent, MdRemoveCircleOutline } from "react-icons/md";
-
 import { useQuery } from "react-query";
 import { Reoverlay } from "reoverlay";
 
@@ -19,15 +18,18 @@ import { apiEventData } from "../../api/api";
 import { displayDateInUserTimezone } from "../../helpers/timeFunctions";
 import { filterList, paginateList } from "../../helpers/listFunctions";
 
-const EventList = ({
+const EventsByTag = ({
   calendarState,
   setCalendarState,
   listProps,
   displayTimezone,
 }) => {
-  const eventsQuery = useQuery(
-    "events",
-    () => axios.get(apiEventData).then((res) => res.data),
+  const eventsByTagQuery = useQuery(
+    ["eventsByTag", calendarState.screenById],
+    () =>
+      axios
+        .get(`${apiEventData}?tag=${calendarState.screenById}`)
+        .then((res) => res.data),
     {
       refetchAllOnWindowFocus: false,
       retry: 1,
@@ -35,12 +37,12 @@ const EventList = ({
     }
   );
 
-  const filteredList = eventsQuery.isLoading
+  const filteredList = eventsByTagQuery.isLoading
     ? []
-    : eventsQuery.isError
+    : eventsByTagQuery.isError
     ? []
-    : eventsQuery.data
-    ? filterList(eventsQuery.data, "name", listProps.filterTerm)
+    : eventsByTagQuery.data
+    ? filterList(eventsByTagQuery.data, "name", listProps.filterTerm)
     : [];
 
   const pagedList = paginateList(
@@ -64,7 +66,7 @@ const EventList = ({
               Events
             </div>
             <div className="ml-2">
-              {eventsQuery.isFetching ? <Updating /> : null}
+              {eventsByTagQuery.isFetching ? <Updating /> : null}
             </div>
           </div>
 
@@ -115,7 +117,7 @@ const EventList = ({
                       ...calendarState,
                       screenByType: "event",
                       screenById: null,
-                      screenByName: null,
+                      screenById: null,
                     })
                   }
                 >
@@ -142,11 +144,11 @@ const EventList = ({
         {renderTopPanel()}
 
         <div>
-          {eventsQuery.isLoading ? (
+          {eventsByTagQuery.isLoading ? (
             <Loading />
-          ) : eventsQuery.isError ? (
+          ) : eventsByTagQuery.isError ? (
             <div className="mt-2 text-gray-500">
-              Error: {eventsQuery.error.message}
+              Error: {eventsByTagQuery.error.message}
             </div>
           ) : pagedList.length === 0 ? (
             <div className="mt-4 text-gray-500">No upcoming events</div>
@@ -203,4 +205,4 @@ const EventList = ({
   );
 };
 
-export default EventList;
+export default EventsByTag;

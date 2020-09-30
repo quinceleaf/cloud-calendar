@@ -1,34 +1,17 @@
-import React, { useState } from "react";
-import Link from "next/link";
-
-import { useMutation, useQuery, queryCache } from "react-query";
+import React from "react";
 
 import axios from "axios";
-import { format, utcToZonedTime, zonedTimeToUtc } from "date-fns-tz";
-import { MdAutorenew, MdEvent } from "react-icons/md";
+import { useToasts } from "react-toast-notifications";
+import { queryCache, useMutation, useQuery } from "react-query";
+
+import { Loading } from "../common";
 
 import EventForm from "./EventForm";
-
+import { apiEventData, apiTagData, apiOrgData } from "../../api/api";
 import { convertDatetimeToUTC, generateTTL } from "../../helpers/timeFunctions";
-import { Loading } from "@components/common";
 
-const apiEventData =
-  "https://lpwe4r4k7h.execute-api.us-east-1.amazonaws.com/dev/events/";
-
-const apiTagData =
-  "https://lpwe4r4k7h.execute-api.us-east-1.amazonaws.com/dev/tags/";
-
-const apiOrgData =
-  "https://lpwe4r4k7h.execute-api.us-east-1.amazonaws.com/dev/organizations/";
-
-export default function AddEvent() {
-  const [createEvent, createEventInfo] = useMutation((values) => {
-    console.log("Form values passed to createEvent:", values);
-    values.date = convertDatetimeToUTC(values.date, values.timezone);
-    values.expiration = generateTTL(values.date);
-    console.log("Form values modified:", values);
-    axios.post(apiEventData, values);
-  });
+const EventAdd = ({ calendarState, setCalendarState }) => {
+  const { addToast } = useToasts();
 
   const tagQuery = useQuery(
     "tags",
@@ -50,6 +33,38 @@ export default function AddEvent() {
     }
   );
 
+  const addEvent = async (values) => {
+    values.date = convertDatetimeToUTC(values.date, values.timezone);
+    values.expires = generateTTL(values.date);
+    return await axios.post(apiEventData, values);
+  };
+
+  const [
+    onSubmit,
+    { status, data, error, isLoading, isError, isSuccess },
+  ] = useMutation(addEvent, {
+    onSuccess: (data) => {
+      const newEvent = data.data.data;
+      queryCache.invalidateQueries("events");
+      queryCache.invalidateQueries(["event", newEvent.id]);
+      queryCache.setQueryData(["event", newEvent.id], newEvent);
+      addToast(`Event: ${newEvent.name} added`, { appearance: "success" });
+    },
+    onError: (error) => {
+      addToast("Error: Couldn't update event", { appearance: "error" });
+    },
+    onSettled: (data) => {
+      const newEvent = data.data.data;
+      setCalendarState({
+        ...calendarState,
+        viewAction: "view",
+        viewId: newEvent.id,
+      });
+
+      queryCache.refetchQueries("events");
+    },
+  });
+
   return (
     <div>
       <div className="mt-5 p-4 shadow rounded bg-white">
@@ -66,17 +81,18 @@ export default function AddEvent() {
           ) : tagQuery.data && orgQuery.data ? (
             <EventForm
               action="add"
-              onSubmit={createEvent}
+              onSubmit={onSubmit}
               clearOnSubmit
               submitText={
-                createEventInfo.isLoading
+                isLoading
                   ? "Saving..."
-                  : createEventInfo.isError
+                  : isError
                   ? "Error!"
-                  : createEventInfo.isSuccess
+                  : isSuccess
                   ? "Saved"
                   : "Create Event"
               }
+              setEventState={setCalendarState}
               tagData={
                 tagQuery.isLoading ? [] : tagQuery.isError ? [] : tagQuery.data
               }
@@ -91,4 +107,6 @@ export default function AddEvent() {
       </div>
     </div>
   );
-}
+};
+
+export default EventAdd;
