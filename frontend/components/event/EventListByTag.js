@@ -14,7 +14,7 @@ import {
 } from "../common";
 
 import { SetTimezoneModal } from "../modals";
-import { apiEventData } from "../../api/api";
+import { apiData } from "../../api";
 import { displayDateInUserTimezone } from "../../helpers/timeFunctions";
 import { filterList, paginateList } from "../../helpers/listFunctions";
 
@@ -28,7 +28,7 @@ const EventsByTag = ({
     ["eventsByTag", calendarState.screenById],
     () =>
       axios
-        .get(`${apiEventData}?tag=${calendarState.screenById}`)
+        .get(`${apiData}/events?tag=${calendarState.screenById}`)
         .then((res) => res.data),
     {
       refetchAllOnWindowFocus: false,

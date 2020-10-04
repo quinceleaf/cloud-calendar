@@ -7,7 +7,7 @@ import { Reoverlay } from "reoverlay";
 
 import OrganizationForm from "./OrganizationForm";
 import { DeleteConfirmModal } from "../modals";
-import { apiOrgData } from "../../api/api";
+import { apiData } from "../../api";
 
 const OrganizationEdit = ({ calendarState, setCalendarState }) => {
   const { addToast } = useToasts();
@@ -17,7 +17,10 @@ const OrganizationEdit = ({ calendarState, setCalendarState }) => {
     .find((organization) => organization.id === calendarState.viewId);
 
   const editOrganization = async (values) => {
-    return await axios.post(`${apiOrgData}${calendarState.viewId}`, values);
+    return await axios.post(
+      `${apiData}/organizations/${calendarState.viewId}`,
+      values
+    );
   };
 
   const [
@@ -47,7 +50,7 @@ const OrganizationEdit = ({ calendarState, setCalendarState }) => {
   });
 
   const deleteOrganization = async () => {
-    return await axios.delete(`${apiOrgData}${organization.id}`);
+    return await axios.delete(`${apiData}/organizations/${organization.id}`);
   };
 
   const [onDeleteSubmit] = useMutation(deleteOrganization, {
@@ -100,8 +103,8 @@ const OrganizationEdit = ({ calendarState, setCalendarState }) => {
                 ? "Saved"
                 : "Save Edits"
             }
-            calendarState
-            setCalendarState
+            calendarState={calendarState}
+            setCalendarState={setCalendarState}
             confirmDelete
           />
         </div>

@@ -7,7 +7,7 @@ import { Reoverlay } from "reoverlay";
 
 import TagForm from "./TagForm";
 import { DeleteConfirmModal } from "../modals";
-import { apiTagData } from "../../api/api";
+import { apiData } from "../../api";
 
 const TagEdit = ({ calendarState, setCalendarState }) => {
   const { addToast } = useToasts();
@@ -17,7 +17,7 @@ const TagEdit = ({ calendarState, setCalendarState }) => {
     .find((tag) => tag.id === calendarState.viewId);
 
   const editTag = async (values) => {
-    return await axios.post(`${apiTagData}${calendarState.viewId}`, values);
+    return await axios.post(`${apiData}/tags/${calendarState.viewId}`, values);
   };
 
   const [
@@ -41,7 +41,7 @@ const TagEdit = ({ calendarState, setCalendarState }) => {
   });
 
   const deleteTag = async () => {
-    return await axios.delete(`${apiTagData}${tag.id}`);
+    return await axios.delete(`${apiData}/tags/${tag.id}`);
   };
 
   const [onDeleteSubmit] = useMutation(deleteTag, {
@@ -92,8 +92,8 @@ const TagEdit = ({ calendarState, setCalendarState }) => {
                 ? "Saved"
                 : "Save Edits"
             }
-            calendarState
-            setCalendarState
+            calendarState={calendarState}
+            setCalendarState={setCalendarState}
             confirmDelete
           />
         </div>

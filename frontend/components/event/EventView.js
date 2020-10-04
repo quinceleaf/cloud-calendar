@@ -8,7 +8,7 @@ import { Reoverlay } from "reoverlay";
 
 import { CustomButton, Loading, Updating } from "../common";
 import { DeleteConfirmModal } from "../modals";
-import { apiEventData } from "../../api/api";
+import { apiData } from "../../api";
 import { displayDateInUserTimezone } from "../../helpers/timeFunctions";
 
 const EventView = ({ calendarState, setCalendarState, displayTimezone }) => {
@@ -19,7 +19,7 @@ const EventView = ({ calendarState, setCalendarState, displayTimezone }) => {
 
     () =>
       axios
-        .get(`${apiEventData}${calendarState.viewId}?collection=true`)
+        .get(`${apiData}/events/${calendarState.viewId}?collection=true`)
         .then((res) => res.data),
     {
       initialData: () =>
@@ -34,7 +34,7 @@ const EventView = ({ calendarState, setCalendarState, displayTimezone }) => {
   );
 
   const deleteEvent = async () => {
-    return await axios.delete(`${apiEventData}${eventQuery.data.id}`);
+    return await axios.delete(`${apiData}/events/${eventQuery.data.id}`);
   };
 
   const [onDeleteSubmit] = useMutation(deleteEvent, {

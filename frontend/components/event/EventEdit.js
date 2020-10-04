@@ -6,7 +6,7 @@ import { queryCache, useMutation, useQuery } from "react-query";
 
 import { Loading } from "../common";
 import EventForm from "./EventForm";
-import { apiEventData, apiTagData, apiOrgData } from "../../api/api";
+import { apiData } from "../../api";
 import { convertDatetimeToUTC, generateTTL } from "../../helpers/timeFunctions";
 
 const EventEdit = ({ calendarState, setCalendarState }) => {
@@ -17,7 +17,7 @@ const EventEdit = ({ calendarState, setCalendarState }) => {
 
     () =>
       axios
-        .get(`${apiEventData}${calendarState.viewId}?collection=true`)
+        .get(`${apiData}/events/${calendarState.viewId}?collection=true`)
         .then((res) => res.data),
     {
       initialData: () =>
@@ -33,7 +33,7 @@ const EventEdit = ({ calendarState, setCalendarState }) => {
 
   const tagQuery = useQuery(
     "tags",
-    () => axios.get(apiTagData, {}).then((res) => res.data),
+    () => axios.get(`${apiData}/tags`, {}).then((res) => res.data),
     {
       refetchAllOnWindowFocus: false,
       retry: 3,
@@ -43,7 +43,7 @@ const EventEdit = ({ calendarState, setCalendarState }) => {
 
   const orgQuery = useQuery(
     "organizations",
-    () => axios.get(apiOrgData, {}).then((res) => res.data),
+    () => axios.get(`${apiData}/organizations`, {}).then((res) => res.data),
     {
       refetchAllOnWindowFocus: false,
       retry: 3,
@@ -55,7 +55,10 @@ const EventEdit = ({ calendarState, setCalendarState }) => {
     values.date = convertDatetimeToUTC(values.date, values.timezone);
     values.expires = generateTTL(values.date);
 
-    return await axios.post(`${apiEventData}${calendarState.viewId}`, values);
+    return await axios.post(
+      `${apiData}/events/${calendarState.viewId}`,
+      values
+    );
   };
 
   const [
@@ -111,7 +114,8 @@ const EventEdit = ({ calendarState, setCalendarState }) => {
                   ? "Saved"
                   : "Save Edits"
               }
-              setEventState={setCalendarState}
+              calendarState={calendarState}
+              setCalendarState={setCalendarState}
               tagData={tagQuery.data}
               orgData={orgQuery.data}
             />

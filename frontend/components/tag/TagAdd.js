@@ -5,13 +5,13 @@ import { useToasts } from "react-toast-notifications";
 import { queryCache, useMutation } from "react-query";
 
 import TagForm from "./TagForm";
-import { apiTagData } from "../../api/api";
+import { apiData } from "../../api";
 
 const TagAdd = ({ calendarState, setCalendarState }) => {
   const { addToast } = useToasts();
 
   const addTag = async (values) => {
-    return await axios.post(apiTagData, values);
+    return await axios.post(`${apiData}/tags`, values);
   };
 
   const [
@@ -47,7 +47,7 @@ const TagAdd = ({ calendarState, setCalendarState }) => {
         <div>
           <TagForm
             action="add"
-            onSubmit
+            onSubmit={onSubmit}
             clearOnSubmit
             submitText={
               isLoading
@@ -58,8 +58,8 @@ const TagAdd = ({ calendarState, setCalendarState }) => {
                 ? "Saved"
                 : "Add Tag"
             }
-            calendarState
-            setCalendarState
+            calendarState={calendarState}
+            setCalendarState={setCalendarState}
           />
         </div>
       </div>

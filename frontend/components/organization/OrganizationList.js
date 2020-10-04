@@ -13,7 +13,7 @@ import {
   SearchBar,
   Updating,
 } from "../common";
-import { apiOrgData } from "../../api/api";
+import { apiData } from "../../api";
 import {
   alphabeticalList,
   filterList,
@@ -23,7 +23,7 @@ import {
 const OrganizationList = ({ calendarState, setCalendarState, listProps }) => {
   const organizationsQuery = useQuery(
     "organizations",
-    () => axios.get(apiOrgData).then((res) => res.data),
+    () => axios.get(`${apiData}/organizations`).then((res) => res.data),
     {
       refetchAllOnWindowFocus: false,
       retry: 1,

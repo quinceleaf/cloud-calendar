@@ -15,7 +15,7 @@ import {
 } from "../common";
 
 import { SetTimezoneModal } from "../modals";
-import { apiEventData } from "../../api/api";
+import { apiData } from "../../api";
 import { displayDateInUserTimezone } from "../../helpers/timeFunctions";
 import { filterList, paginateList } from "../../helpers/listFunctions";
 
@@ -27,7 +27,7 @@ const EventList = ({
 }) => {
   const eventsQuery = useQuery(
     "events",
-    () => axios.get(apiEventData).then((res) => res.data),
+    () => axios.get(`${apiData}/events`).then((res) => res.data),
     {
       refetchAllOnWindowFocus: false,
       retry: 1,

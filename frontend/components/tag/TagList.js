@@ -12,7 +12,7 @@ import {
   SearchBar,
   Updating,
 } from "../common";
-import { apiTagData } from "../../api/api";
+import { apiData } from "../../api";
 import {
   alphabeticalList,
   filterList,
@@ -22,7 +22,7 @@ import {
 const TagList = ({ calendarState, setCalendarState, listProps }) => {
   const tagsQuery = useQuery(
     "tags",
-    () => axios.get(apiTagData).then((res) => res.data),
+    () => axios.get(`${apiData}/tags`).then((res) => res.data),
     {
       refetchAllOnWindowFocus: false,
       retry: 1,

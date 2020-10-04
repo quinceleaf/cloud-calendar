@@ -5,13 +5,13 @@ import { useToasts } from "react-toast-notifications";
 import { queryCache, useMutation } from "react-query";
 
 import OrganizationForm from "./OrganizationForm";
-import { apiOrgData } from "../../api/api";
+import { apiData } from "../../api";
 
 const OrganizationAdd = ({ calendarState, setCalendarState }) => {
   const { addToast } = useToasts();
 
   const addOrganization = async (values) => {
-    return await axios.post(apiOrgData, values);
+    return await axios.post({`${apiData}/organizations`}, values);
   };
 
   const [
@@ -50,7 +50,7 @@ const OrganizationAdd = ({ calendarState, setCalendarState }) => {
         <div>
           <OrganizationForm
             action="add"
-            onSubmit
+            onSubmit={onSubmit}
             clearOnSubmit
             submitText={
               isLoading
@@ -61,8 +61,8 @@ const OrganizationAdd = ({ calendarState, setCalendarState }) => {
                 ? "Saved"
                 : "Add Organization"
             }
-            calendarState
-            setCalendarState
+            calendarState={calendarState}
+            setCalendarState={setCalendarState}
           />
         </div>
       </div>

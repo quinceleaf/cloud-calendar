@@ -59,7 +59,8 @@ const EventForm = ({
   initialValues = null,
   submitText,
   onSubmit,
-  setEventState,
+  calendarState,
+  setCalendarState,
   tagData,
   orgData,
 }) => {
@@ -182,7 +183,11 @@ const EventForm = ({
         {action == "edit" && (
           <CustomButton
             onClick={() =>
-              setEventState({ action: "view", id: initialValues.id })
+              setCalendarState({
+                ...calendarState,
+                viewAction: "view",
+                viewId: initialValues.id,
+              })
             }
             text="Cancel"
           />
@@ -190,7 +195,13 @@ const EventForm = ({
 
         {action == "add" && (
           <CustomButton
-            onClick={() => setEventState({ action: "list", id: null })}
+            onClick={() =>
+              setCalendarState({
+                ...calendarState,
+                viewAction: "list",
+                viewId: null,
+              })
+            }
             text="Cancel"
           />
         )}

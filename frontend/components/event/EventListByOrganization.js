@@ -12,7 +12,7 @@ import {
   Updating,
 } from "../common";
 import { SetTimezoneModal } from "../modals";
-import { apiEventData } from "../../api/api";
+import { apiData } from "../../api";
 import { displayDateInUserTimezone } from "../../helpers/timeFunctions";
 import { filterList, paginateList } from "../../helpers/listFunctions";
 
@@ -27,7 +27,7 @@ const EventsByOrganization = ({
 
     () =>
       axios
-        .get(`${apiEventData}?organization=${calendarState.screenById}`)
+        .get(`${apiData}/events?organization=${calendarState.screenById}`)
         .then((res) => res.data),
     {
       refetchAllOnWindowFocus: false,

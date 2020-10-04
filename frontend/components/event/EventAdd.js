@@ -7,7 +7,7 @@ import { queryCache, useMutation, useQuery } from "react-query";
 import { Loading } from "../common";
 
 import EventForm from "./EventForm";
-import { apiEventData, apiTagData, apiOrgData } from "../../api/api";
+import { apiData } from "../../api";
 import { convertDatetimeToUTC, generateTTL } from "../../helpers/timeFunctions";
 
 const EventAdd = ({ calendarState, setCalendarState }) => {
@@ -15,7 +15,7 @@ const EventAdd = ({ calendarState, setCalendarState }) => {
 
   const tagQuery = useQuery(
     "tags",
-    () => axios.get(apiTagData, {}).then((res) => res.data),
+    () => axios.get(`${apiData}/tags`, {}).then((res) => res.data),
     {
       refetchAllOnWindowFocus: false,
       retry: 3,
@@ -25,7 +25,7 @@ const EventAdd = ({ calendarState, setCalendarState }) => {
 
   const orgQuery = useQuery(
     "organizations",
-    () => axios.get(apiOrgData, {}).then((res) => res.data),
+    () => axios.get(`${apiData}/organizations`, {}).then((res) => res.data),
     {
       refetchAllOnWindowFocus: false,
       retry: 3,
@@ -36,7 +36,7 @@ const EventAdd = ({ calendarState, setCalendarState }) => {
   const addEvent = async (values) => {
     values.date = convertDatetimeToUTC(values.date, values.timezone);
     values.expires = generateTTL(values.date);
-    return await axios.post(apiEventData, values);
+    return await axios.post(`${apiData}/events`, values);
   };
 
   const [
@@ -92,7 +92,8 @@ const EventAdd = ({ calendarState, setCalendarState }) => {
                   ? "Saved"
                   : "Create Event"
               }
-              setEventState={setCalendarState}
+              calendarState={calendarState}
+              setCalendarState={setCalendarState}
               tagData={
                 tagQuery.isLoading ? [] : tagQuery.isError ? [] : tagQuery.data
               }
